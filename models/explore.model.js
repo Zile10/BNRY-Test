@@ -11,7 +11,7 @@ module.exports = {
         language: req.body.lang || 'en',
         sortBy: 'relevancy',
       }
-    if(!req.body.query) newsapiObj.q = 'the'
+    if(!req.body.query) {newsapiObj.q = 'the'}
     newsapi.v2.everything(newsapiObj).then(response => {
         res.send(response)
     });
