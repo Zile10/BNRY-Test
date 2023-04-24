@@ -1,9 +1,9 @@
 const express = require('express');
 const router = express.Router();
-const {businessController} = require('../controllers')
+const {techController} = require('../controllers')
 
 router.get('/', (req, res) => {
-    businessController.getHeadlines(req, res)
+    techController.getHeadlines(req, res)
 })
 
 module.exports = router

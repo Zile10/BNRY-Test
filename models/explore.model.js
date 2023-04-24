@@ -1,16 +1,19 @@
-// app.use('/za', (req, res) => {
-//     fetch(`https://newsapi.org/v2/top-headlines?country=za&apiKey=9bde1d04c4e44930aa400357aebc6237`)
-//     .then(res => {return res.json()})
-//     .then(data => {
-//         res.send(data.articles)
-//     })
-// })
+const {NEWS_API_KEY} = process.env
+const NewsAPI = require('newsapi');
+const newsapi = new NewsAPI(NEWS_API_KEY);
+
 
 module.exports = {
-    getHeadlines(req, res){
-        
-    },
-    getSearchResults(req, res){
-
-    },
+  getSearchResults(req, res){
+    let newsapiObj = {
+        qInTitle: req.body.query || '',
+        category: req.body.category || null,
+        language: req.body.lang || 'en',
+        sortBy: 'relevancy',
+      }
+    if(!req.body.query) newsapiObj.q = 'the'
+    newsapi.v2.everything(newsapiObj).then(response => {
+        res.send(response)
+    });
+  },
 }
