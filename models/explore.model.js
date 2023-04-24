@@ -5,14 +5,12 @@ const newsapi = new NewsAPI(NEWS_API_KEY);
 
 module.exports = {
   getSearchResults(req, res){
-    let newsapiObj = {
-        qInTitle: req.body.query || '',
+    newsapi.v2.everything({
+        qInTitle: req.body.query || 'the',
         category: req.body.category || null,
         language: req.body.lang || 'en',
         sortBy: 'relevancy',
-      }
-    if(!req.body.query) {newsapiObj.q = 'the'}
-    newsapi.v2.everything(newsapiObj).then(response => {
+      }).then(response => {
         res.send(response)
     });
   },
